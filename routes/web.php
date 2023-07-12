@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
 
-Route::get('/form', [IndoregionController::class, 'form'])->name('form');
+Route::get('/provinces', [IndoregionController::class, 'provinces'])->name('provinces');
+Route::get('regency', [IndoregionController::class, 'getregency'])->name('get.regency');
+Route::get('districts', [IndoregionController::class, 'getdistricts'])->name('get.districts');
+Route::get('villages', [IndoregionController::class, 'getvillages'])->name('get.villages');
+

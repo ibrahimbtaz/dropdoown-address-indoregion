@@ -11,13 +11,34 @@ use App\Models\Village;
 
 class IndoregionController extends Controller
 {
-    public function form()
+    public function provinces()
     {
-
         $provinces = Province::all();
-        $regencies = Regency::all();
-        $districts = District::all();
-        $villages = Village::all();
-        return view('form', compact('provinces', 'regencies', 'districts', 'villages'));
+
+        return view('form', compact('provinces'));
+
     }
+
+    public function getregency(Request $request)
+    {
+        $province = Province::findOrfail($request->id);
+        $provinces = $province->regencies->pluck('name', 'id');
+        return response()->json($provinces);
+    }
+
+    public function getdistricts(Request $request)
+    {
+        $regency = Regency::findOrfail($request->id);
+        $districts = $regency->districts->pluck('name', 'id');
+        return response()->json($districts);
+    }
+
+    public function getvillages(Request $request)
+    {
+        $district = District::findOrfail($request->id);
+        $villages = $district->villages->pluck('name', 'id');
+        return response()->json($villages);
+    }
+
+
 }
